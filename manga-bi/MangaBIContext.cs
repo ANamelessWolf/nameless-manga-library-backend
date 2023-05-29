@@ -31,9 +31,35 @@ namespace Nameless.MangaBI
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-            this.CreateLanguageCatalogueModel(modelBuilder);
+            //Catalogos
+            this.CreateCatalogueModel<LanguageCatalogue>("cat_language", modelBuilder);
+            this.CreateCatalogueModel<PublisherCatalogue>("cat_publisher", modelBuilder);
+            this.CreateCatalogueModel<AuthorRoleCatalogue>("cat_author_role", modelBuilder);
+            this.CreateCatalogueModel<DemographicCatalogue>("cat_demographic", modelBuilder);
             this.CreateCurrencyCatalogueModel(modelBuilder);
+            //Tablas
+            this.CreateAuthorModel(modelBuilder);
             base.OnModelCreating(modelBuilder);
+        }
+
+        private void CreateAuthorModel(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Author>(entity =>
+            {
+                entity.ToTable("author");
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name");
+
+                entity.Property(e => e.RoleId)
+                    .IsRequired()
+                    .HasColumnName("role_id");
+
+
+            });
         }
 
         private void CreateCurrencyCatalogueModel(ModelBuilder modelBuilder)
@@ -46,7 +72,7 @@ namespace Nameless.MangaBI
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("Name");
-       
+
                 entity.Property(e => e.Value)
                     .IsRequired()
                     .HasColumnName("Value");
@@ -57,11 +83,11 @@ namespace Nameless.MangaBI
             });
         }
 
-        protected void CreateLanguageCatalogueModel(ModelBuilder modelBuilder)
+        protected void CreateCatalogueModel<T>(string tableName, ModelBuilder modelBuilder) where T : Catalogue
         {
-            modelBuilder.Entity<LanguageCatalogue>(entity =>
+            modelBuilder.Entity<T>(entity =>
             {
-                entity.ToTable("cat_language");
+                entity.ToTable(tableName);
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Name)

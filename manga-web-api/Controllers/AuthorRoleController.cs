@@ -9,10 +9,10 @@ namespace Nameless.MangaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CurrencyController
-        : BasicGenericController<CurrencyCatalogue, CurrencyCatalogueDto>
+    public class AuthorRoleController
+        : BasicGenericController<AuthorRoleCatalogue, AuthorRoleCatalogueDto>
     {
-        public CurrencyController(CurrencyRepository repository, IMapper mapper)
+        public AuthorRoleController(AuthorRoleRepository repository, IMapper mapper)
             : base(repository, mapper)
         {
         }

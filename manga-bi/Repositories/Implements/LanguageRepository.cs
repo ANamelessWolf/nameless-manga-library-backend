@@ -1,9 +1,10 @@
 ﻿using Nameless.MangaBI;
 using Nameless.MangaBI.Services.Interfaces;
 using Nameless.Manga.Models;
-using Nameless.WebApi.Repositories.Interfaces;
+using Nameless.MangaBI.Repositories.Interfaces;
+using Nameless.WebApi.Repositories;
 
-namespace Nameless.WebApi.Repositories.Implements
+namespace Nameless.MangaBI.Repositories.Implements
 {
     public class LanguageRepository :
         GenericRepository<LanguageCatalogue>, ILanguageRepository, IContextAccesible

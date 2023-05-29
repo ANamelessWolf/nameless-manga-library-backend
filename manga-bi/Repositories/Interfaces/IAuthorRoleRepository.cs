@@ -3,7 +3,7 @@ using Nameless.WebApi.Repositories;
 
 namespace Nameless.MangaBI.Repositories.Interfaces
 {
-    public interface ICurrencyRepository : IGenericRepository<CurrencyCatalogue>
+    public interface IAuthorRoleRepository : IGenericRepository<AuthorRoleCatalogue>
     {
     }
 }

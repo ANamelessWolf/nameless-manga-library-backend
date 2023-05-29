@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>manga_web_api</RootNamespace>
+    <RootNamespace>Nameless.MangaWebApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

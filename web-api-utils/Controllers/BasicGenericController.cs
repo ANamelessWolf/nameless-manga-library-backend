@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.Internal;
 using Nameless.WebApi.Models;
-using Nameless.WebApi.Repositories.Interfaces;
+using Nameless.WebApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using System.Text;

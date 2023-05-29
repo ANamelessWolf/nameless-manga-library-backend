@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Nameless.Manga.Models;
 using Nameless.Manga.ModelsDto;
 using Nameless.WebApi.Controllers;
-using Nameless.WebApi.Repositories.Implements;
+using Nameless.MangaBI.Repositories.Implements;
 
-namespace manga_web_api.Controllers
+namespace Nameless.MangaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

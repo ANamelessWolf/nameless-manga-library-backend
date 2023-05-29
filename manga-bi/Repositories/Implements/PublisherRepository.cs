@@ -6,12 +6,12 @@ using Nameless.WebApi.Repositories;
 
 namespace Nameless.MangaBI.Repositories.Implements
 {
-    public class CurrencyRepository :
-        GenericRepository<CurrencyCatalogue>, ICurrencyRepository, IContextAccesible
+    public class PublisherRepository :
+        GenericRepository<PublisherCatalogue>, IPublisherRepository, IContextAccesible
     {
         public MangaBIContext Context => (MangaBIContext)this._context;
 
-        public CurrencyRepository(MangaBIContext context) : base(context)
+        public PublisherRepository(MangaBIContext context) : base(context)
         {
 
         }

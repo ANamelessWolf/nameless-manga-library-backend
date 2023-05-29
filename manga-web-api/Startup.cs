@@ -3,9 +3,8 @@ using Nameless.MangaWebApi.Installers;
 using Nameless.MangaBI;
 using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore;
-using Nameless.WebApi.Repositories.Interfaces;
 using Nameless.WebApi.Repositories;
-using Nameless.WebApi.Repositories.Implements;
+using Nameless.MangaBI.Repositories.Implements;
 
 namespace Nameless.MangaWebApi
 {
@@ -69,7 +68,13 @@ namespace Nameless.MangaWebApi
             //Catalogues
             services.AddScoped(typeof(LanguageRepository), typeof(LanguageRepository));
             services.AddScoped(typeof(CurrencyRepository), typeof(CurrencyRepository));
-            
+            services.AddScoped(typeof(PublisherRepository), typeof(PublisherRepository));
+            services.AddScoped(typeof(DemographicRepository), typeof(DemographicRepository));
+            services.AddScoped(typeof(AuthorRoleRepository), typeof(AuthorRoleRepository));
+
+            //Tables
+            services.AddScoped(typeof(AuthorRepository), typeof(AuthorRepository));
+
 
         }
 

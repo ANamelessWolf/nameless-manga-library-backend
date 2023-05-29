@@ -1,5 +1,5 @@
 ﻿using Nameless.WebApi.Models;
-using Nameless.WebApi.Repositories.Interfaces;
+using Nameless.WebApi.Repositories;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +7,11 @@ using System.Text.RegularExpressions;
 
 namespace Nameless.WebApi.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class 
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected DbContext _context;
+
+        public Action<T> DataIsSelected;
 
         public GenericRepository(DbContext context)
         {
@@ -25,12 +27,19 @@ namespace Nameless.WebApi.Repositories
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            var result = await _context.Set<T>().ToListAsync();
+            if (this.DataIsSelected != null)
+                foreach (var entity in result)
+                    this.DataIsSelected(entity);
+            return result;
         }
 
         public async Task<T> GetById(int id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            var entity = await _context.Set<T>().FindAsync(id);
+            if (this.DataIsSelected != null)
+                this.DataIsSelected(entity);
+            return entity;
         }
 
         public async Task<T> Insert(T entity)
@@ -39,6 +48,8 @@ namespace Nameless.WebApi.Repositories
                 throw new Exception("The entity is null");
             _context.Set<T>().Add(entity);
             await _context.SaveChangesAsync();
+            if (this.DataIsSelected != null)
+                this.DataIsSelected(entity);
             return entity;
         }
 

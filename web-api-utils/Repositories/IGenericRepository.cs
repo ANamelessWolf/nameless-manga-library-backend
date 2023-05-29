@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Nameless.WebApi.Repositories.Interfaces
+namespace Nameless.WebApi.Repositories
 {
     public interface IGenericRepository<T> where T : class
     {

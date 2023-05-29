@@ -1,6 +1,7 @@
 ﻿using Nameless.Manga.Models;
+using Nameless.WebApi.Repositories;
 
-namespace Nameless.WebApi.Repositories.Interfaces
+namespace Nameless.MangaBI.Repositories.Interfaces
 {
     public interface ILanguageRepository : IGenericRepository<LanguageCatalogue>
     {

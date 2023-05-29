@@ -1,4 +1,4 @@
-﻿using Nameless.WebApi.Repositories.Interfaces;
+﻿using Nameless.WebApi.Repositories;
 using Nameless.WebApi.Services.Interfaces;
 using System;
 using System.Collections.Generic;

@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Nameless.WebApi.Repositories.Interfaces;
+using Nameless.WebApi.Repositories;
 using Nameless.WebApi.Models;
 using AutoMapper.Internal;
 
