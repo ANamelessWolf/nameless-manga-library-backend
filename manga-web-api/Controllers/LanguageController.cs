@@ -10,7 +10,7 @@ namespace Nameless.MangaWebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class LanguageController 
-        : BasicGenericController<LanguageCatalogue, LanguageCatalogueDto>
+        : CatalogueController<LanguageCatalogue, CatalogueDto>
     {
         public LanguageController(LanguageRepository repository, IMapper mapper)
             : base(repository, mapper)

@@ -9,7 +9,7 @@ namespace Nameless.WebApi.Mapper
         public HelperMapper()
         {
             #region Mapper para Language
-            CreateMap<LanguageCatalogue, LanguageCatalogueDto>()
+            CreateMap<LanguageCatalogue, CatalogueDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
             #endregion
@@ -23,19 +23,19 @@ namespace Nameless.WebApi.Mapper
             #endregion
 
             #region Mapper para Demographic
-            CreateMap<DemographicCatalogue, DemographicCatalogueDto>()
+            CreateMap<DemographicCatalogue, CatalogueDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
             #endregion
 
             #region Mapper para Publisher
-            CreateMap<PublisherCatalogue, PublisherCatalogueDto>()
+            CreateMap<PublisherCatalogue, CatalogueDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
             #endregion
 
             #region Mapper para Author role
-            CreateMap<AuthorRoleCatalogue, AuthorRoleCatalogueDto>()
+            CreateMap<AuthorRoleCatalogue, CatalogueDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
             #endregion

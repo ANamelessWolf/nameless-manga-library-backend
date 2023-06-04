@@ -9,7 +9,7 @@ namespace Nameless.WebApi.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected DbContext _context;
+        public DbContext _context;
 
         public Action<T> DataIsSelected;
 
@@ -33,6 +33,9 @@ namespace Nameless.WebApi.Repositories
                     this.DataIsSelected(entity);
             return result;
         }
+
+
+
 
         public async Task<T> GetById(int id)
         {
@@ -61,6 +64,17 @@ namespace Nameless.WebApi.Repositories
             await _context.SaveChangesAsync();
             return entity;
         }
+
+        public async Task<IEnumerable<T>> Search(string filter)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            filter = "a => " + filter;
+            var options = ScriptOptions.Default.AddReferences(typeof(T).Assembly);
+            Func<T, bool> expression = await CSharpScript.EvaluateAsync<Func<T, bool>>(filter, options);
+            IEnumerable<T> result = query.Where(expression);
+            return result;
+        }
+
         public async Task<IEnumerable<T>> Filter(string filter)
         {
             IQueryable<T> query = _context.Set<T>();
@@ -162,5 +176,9 @@ namespace Nameless.WebApi.Repositories
             }
             return lastFilter.Trim() == "s";
         }
+
+
+
+
     }
 }

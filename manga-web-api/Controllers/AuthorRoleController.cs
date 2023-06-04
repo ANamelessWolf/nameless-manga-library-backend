@@ -10,7 +10,7 @@ namespace Nameless.MangaWebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class AuthorRoleController
-        : BasicGenericController<AuthorRoleCatalogue, AuthorRoleCatalogueDto>
+        : CatalogueController<AuthorRoleCatalogue, AuthorRoleCatalogueDto>
     {
         public AuthorRoleController(AuthorRoleRepository repository, IMapper mapper)
             : base(repository, mapper)
