@@ -58,26 +58,69 @@ namespace Nameless.WebApi.Mapper
             #region Mapper para Manga
             CreateMap<MangaModel, MangaDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.NameEn, opt => opt.MapFrom(src => src.NameEn))
                 .ForMember(dest => dest.NameJp, opt => opt.MapFrom(src => src.NameJp))
                 .ForMember(dest => dest.Volumes, opt => opt.MapFrom(src => src.Volumes))
                 .ForMember(dest => dest.Chapters, opt => opt.MapFrom(src => src.Chapters))
                 .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => src.IsCompleted))
                 .ForMember(dest => dest.DemographicId, opt => opt.MapFrom(src => src.DemographicId))
-                .ForMember(dest => dest.Illustrator, opt => opt.MapFrom(src => src.Illustrator))
-                .ForMember(dest => dest.Writer, opt => opt.MapFrom(src => src.Writer))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+                .ForMember(dest => dest.Demographic, opt => opt.MapFrom(src => src.Demographic.Name))
+                .ForMember(dest => dest.IllustratorId, opt => opt.MapFrom(src => src.IllustratorId))
+                .ForMember(dest => dest.Illustrator, opt => opt.MapFrom(src => src.Illustrator.Name))
+                .ForMember(dest => dest.WriterId, opt => opt.MapFrom(src => src.WriterId))
+                .ForMember(dest => dest.Writer, opt => opt.MapFrom(src => src.Writer.Name));
+            CreateMap<NewManga, MangaModel>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.NameEn, opt => opt.MapFrom(src => src.NameEn))
+                .ForMember(dest => dest.NameJp, opt => opt.MapFrom(src => src.NameJp))
+                .ForMember(dest => dest.Volumes, opt => opt.MapFrom(src => src.Volumes))
+                .ForMember(dest => dest.Chapters, opt => opt.MapFrom(src => src.Chapters))
+                .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => src.IsCompleted))
+                .ForMember(dest => dest.DemographicId, opt => opt.MapFrom(src => src.DemographicId))
+                .ForMember(dest => dest.IllustratorId, opt => opt.MapFrom(src => src.IllustratorId))
+                .ForMember(dest => dest.WriterId, opt => opt.MapFrom(src => src.WriterId));
             CreateMap<MangaDto, MangaModel>()
-                      .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.NameEn, opt => opt.MapFrom(src => src.NameEn))
                 .ForMember(dest => dest.NameJp, opt => opt.MapFrom(src => src.NameJp))
                 .ForMember(dest => dest.Volumes, opt => opt.MapFrom(src => src.Volumes))
                 .ForMember(dest => dest.Chapters, opt => opt.MapFrom(src => src.Chapters))
                 .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => src.IsCompleted))
                 .ForMember(dest => dest.DemographicId, opt => opt.MapFrom(src => src.DemographicId))
-                .ForMember(dest => dest.Illustrator, opt => opt.MapFrom(src => src.Illustrator))
-                .ForMember(dest => dest.Writer, opt => opt.MapFrom(src => src.Writer))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+                .ForMember(dest => dest.IllustratorId, opt => opt.MapFrom(src => src.IllustratorId))
+                .ForMember(dest => dest.WriterId, opt => opt.MapFrom(src => src.WriterId));
+            #endregion
+
+            #region Mapper para Manga Library
+            CreateMap<MangaLibrary, MangaLibraryDto>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.MangaId, opt => opt.MapFrom(src => src.MangaId))
+                .ForMember(dest => dest.Manga, opt => opt.MapFrom(src => src.Manga.Name))
+                .ForMember(dest => dest.Volume, opt => opt.MapFrom(src => src.Volume))
+                .ForMember(dest => dest.PublisherId, opt => opt.MapFrom(src => src.PublisherId))
+                .ForMember(dest => dest.Publisher, opt => opt.MapFrom(src => src.Publisher.Name))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.CurrencyId, opt => opt.MapFrom(src => src.CurrencyId))
+                .ForMember(dest => dest.Currency, opt => opt.MapFrom(src => src.Currency.Name))
+                .ForMember(dest => dest.LanguageId, opt => opt.MapFrom(src => src.LanguageId))
+                .ForMember(dest => dest.Language, opt => opt.MapFrom(src => src.Language.Name));
+            CreateMap<NewMangaVolume, MangaLibrary>()
+                .ForMember(dest => dest.MangaId, opt => opt.MapFrom(src => src.MangaId))
+                .ForMember(dest => dest.Volume, opt => opt.MapFrom(src => src.Volume))
+                .ForMember(dest => dest.PublisherId, opt => opt.MapFrom(src => src.PublisherId))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.CurrencyId, opt => opt.MapFrom(src => src.CurrencyId))
+                .ForMember(dest => dest.LanguageId, opt => opt.MapFrom(src => src.LanguageId));
+            CreateMap<MangaLibraryDto, MangaLibrary>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.MangaId, opt => opt.MapFrom(src => src.MangaId))
+                .ForMember(dest => dest.Volume, opt => opt.MapFrom(src => src.Volume))
+                .ForMember(dest => dest.PublisherId, opt => opt.MapFrom(src => src.PublisherId))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.CurrencyId, opt => opt.MapFrom(src => src.CurrencyId))
+                .ForMember(dest => dest.LanguageId, opt => opt.MapFrom(src => src.LanguageId));
             #endregion
 
         }

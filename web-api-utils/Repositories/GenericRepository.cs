@@ -34,9 +34,6 @@ namespace Nameless.WebApi.Repositories
             return result;
         }
 
-
-
-
         public async Task<T> GetById(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id);

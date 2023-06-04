@@ -9,10 +9,10 @@ namespace Nameless.MangaWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MangaController 
-        : GenericController<MangaModel, MangaDto, NewManga>
+    public class MangaLibraryController
+        : GenericController<MangaLibrary, MangaLibraryDto, NewMangaVolume>
     {
-        public MangaController(MangaRepository repository, IMapper mapper)
+        public MangaLibraryController(MangaLibraryRepository repository, IMapper mapper)
             : base(repository, mapper)
         {
 

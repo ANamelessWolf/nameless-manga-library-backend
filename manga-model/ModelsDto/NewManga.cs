@@ -1,19 +1,17 @@
-﻿using Nameless.WebApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Nameless.Manga.ModelsDto
 {
-    /// <summary>
-    /// Manga table model class
-    /// </summary>
-    public class MangaDto : BaseDto
+    public class NewManga
     {
         /// <summary>
         /// Manga name
         /// </summary>
-        public string? Name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// Manga english name
         /// </summary>
@@ -39,21 +37,9 @@ namespace Nameless.Manga.ModelsDto
         /// </summary>
         public int DemographicId { get; set; }
         /// <summary>
-        /// Manga demographic
-        /// </summary>
-        public String Demographic { get; set; }
-        /// <summary>
         /// Manga author writer id
         /// </summary>
         public int WriterId { get; set; }
-        /// <summary>
-        /// Author role
-        /// </summary>
-        public String Writer { get; set; }
-        /// <summary>
-        /// Author role
-        /// </summary>
-        public String Illustrator { get; set; }
         /// <summary>
         /// Manga author illustrator id
         /// </summary>

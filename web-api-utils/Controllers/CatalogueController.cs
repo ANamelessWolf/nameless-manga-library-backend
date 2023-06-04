@@ -34,7 +34,6 @@ namespace Nameless.WebApi.Controllers
         /// <returns>A list of the current objects</returns>
         /// <response code="200">The list of items</response>
         [HttpGet]
-        [Route("[action]/")]
         public override async Task<IActionResult> GetAll([FromQuery] string? orderField = "Name", [FromQuery] OrderType? orderType = OrderType.Asc)
         {
             return await base.GetAll(orderField, orderType);

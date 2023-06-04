@@ -18,7 +18,7 @@ namespace Nameless.MangaBI.Repositories.Implements
 
         public MangaBIContext Context => (MangaBIContext)this._context;
 
-        public MangaRepository(MangaBIContext context, AuthorRepository authorRepo, DemographicRepository demoGraphicRepo) 
+        public MangaRepository(MangaBIContext context, AuthorRepository authorRepo, DemographicRepository demoGraphicRepo)
             : base(context)
         {
             this.DataIsSelected = SelectMangaDependency;
@@ -30,9 +30,10 @@ namespace Nameless.MangaBI.Repositories.Implements
         {
             manga.Demographic = await this._demoGraphicRepo.GetById(manga.DemographicId);
             manga.Writer = await this._authorRepo.GetById(manga.WriterId);
-            if(manga.WriterId != manga.IllustratorId)
-                manga.Illustrator = await this._authorRepo.GetById(manga.WriterId);
-            manga.Illustrator = manga.Writer;
+            if (manga.WriterId != manga.IllustratorId)
+                manga.Illustrator = await this._authorRepo.GetById(manga.IllustratorId);
+            else
+                manga.Illustrator = manga.Writer;
         }
 
     }
