@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Nameless.WebApi.Models
 {
-    public class PageResult<T> where T : class
+    public class DbModel
     {
-        public int TotalRows { get; set; }
-        public IEnumerable<T>? Items { get; set; }
+        /// <summary>
+        /// Primary key
+        /// </summary>
+        public int Id { get; set; }
     }
 }
-

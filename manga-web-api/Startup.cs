@@ -74,6 +74,7 @@ namespace Nameless.MangaWebApi
 
             //Tables
             services.AddScoped(typeof(AuthorRepository), typeof(AuthorRepository));
+            services.AddScoped(typeof(MangaRepository), typeof(MangaRepository));
 
 
         }

@@ -13,7 +13,7 @@ using AutoMapper.Internal;
 
 namespace Nameless.WebApi.Controllers
 {
-    public class GenericController<T, D> : BasicGenericController<T, D> where T : class where D : BaseDto
+    public class GenericController<T, D, I> : BasicGenericController<T, D> where T : DbModel where D : BaseDto where I : class
     {
 
         public GenericController(IGenericRepository<T> repository, IMapper mapper) :
@@ -44,11 +44,10 @@ namespace Nameless.WebApi.Controllers
         /// <response code="201">Regresa un objeto con los datos de la entidad agregada</response>
         //[Authorize]
         [HttpPost]
-        public ActionResult<D> Insert(D entity)
+        public ActionResult<T> Insert(I entity)
         {
             var result = _repository.Insert(_mapper.Map<T>(entity)).Result;
-            var resultDto = _mapper.Map<D>(result);
-            return CreatedAtAction("GetById", new { id = resultDto.Id }, resultDto);
+            return CreatedAtAction("GetById", new { id = result.Id }, result);
         }
 
         /// <summary>

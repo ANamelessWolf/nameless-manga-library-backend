@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Nameless.WebApi.Models;
 
 namespace Nameless.Manga.Models
 {
     /// <summary>
     /// Author table model class
     /// </summary>
-    public class Author
+    public class Author: DbModel
     {
-        /// <summary>
-        /// Primary key
-        /// </summary>
-        public int Id { get; set; }
         /// <summary>
         /// Author full name
         /// </summary>

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Nameless.WebApi.Models;
 
 namespace Nameless.Manga.Models
 {
     /// <summary>
     /// Principal table of the employee
     /// </summary>
-    public class Catalogue
+    public class Catalogue : DbModel
     {
-        /// <summary>
-        /// Catalogue primary key
-        /// </summary>
-        public int Id { get; set; }
         /// <summary>
         /// Catalogue item value
         /// </summary>

@@ -12,56 +12,32 @@ namespace Nameless.WebApi.Controllers
     /// </summary>
     /// <typeparam name="T">The Model Type</typeparam>
     /// <typeparam name="D">The DTO Model Type</typeparam>
-    public class CatalogueController<T, D> : Controller where T : class where D : BaseDto
+    public class CatalogueController<T, D> :
+        BasicGenericController<T, D> where T : class where D : BaseDto
     {
-        protected readonly IGenericRepository<T> _repository;
-        protected readonly IMapper _mapper;
-
         /// <summary>
         /// Initialize a new instance for a catalogue controller
         /// </summary>
         /// <param name="repository">The database repository</param>
         /// <param name="mapper">The model mapper</param>
         public CatalogueController(IGenericRepository<T> repository, IMapper mapper)
+            : base(repository, mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
+
         }
 
         /// <summary>
-        /// Get all instances of catalogue
+        /// Get all items, can be sorted by fields
         /// </summary>
+        /// <param name="orderField">The field name used to sort the fields</param>
+        /// <param name="orderType">The order type, ASC or DSC</param>
         /// <returns>A list of the current objects</returns>
         /// <response code="200">The list of items</response>
         [HttpGet]
         [Route("[action]/")]
-        public async Task<IActionResult> GetAll()
+        public override async Task<IActionResult> GetAll([FromQuery] string? orderField = "Name", [FromQuery] OrderType? orderType = OrderType.Asc)
         {
-            var result = await _repository.GetAll();
-            result = await result.OrderBy<T>("Name", OrderType.Asc);
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Get a catalogue item by id
-        /// </summary>
-        /// <param name="id">The item id</param>
-        /// <returns>The catalogue item</returns>
-        /// <response code="200">The catalogue item</response>
-        [HttpGet("{id}", Name = "[controller]/GetById")]
-        public async Task<ActionResult<D>> GetById(int id)
-        {
-            try
-            {
-                var result = await _repository.GetById(id);
-                if (result == null)
-                    return NotFound();
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return await base.GetAll(orderField, orderType);
         }
 
         /// <summary>
@@ -72,64 +48,43 @@ namespace Nameless.WebApi.Controllers
         /// <response code="200">The list of items</response>
         [HttpGet]
         [Route("[action]/")]
-        public async Task<IActionResult> Search(string? query)
+        public override async Task<IActionResult> Search(string? query, string? orderField = "Name")
         {
-            try
-            {
-                IEnumerable<T> result = await this.Filter(query);
-                result = await result.OrderBy<T>("Name", OrderType.Asc);
-                return Ok(result);
-            }
-            catch (ArgumentException ae)
-            {
-                return BadRequest(ae.Message);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return await base.Search(query, orderField);
         }
 
         /// <summary>
-        /// Gets the items filtering, by query and limiting its results by a pageSize, and the given index
+        /// Maps the selected result to the DTO Model
         /// </summary>
-        /// <param name="pageIndex">The page index</param>
-        /// <param name="pageSize">The page size</param>
-        /// <param name="query">The filtering query</param>
-        /// <param name="sortAsc">True if values are sort ascending</param>
-        /// <returns>A list of the current objects</returns>
-        /// <response code="200">The list of items</response>
-        [HttpGet]
-        [Route("[action]/")]
-        public async Task<IActionResult> GetByPage([FromQuery] int pageIndex, [FromQuery] int pageSize, string? query, Boolean sortAsc = true)
+        /// <param name="result">The mapped result</param>
+        /// <returns>The list of mapped selected objects</returns>
+        protected override OkObjectResult Map(IEnumerable<T> result)
         {
-            try
-            {
-                IEnumerable<T> result = await this.Filter(query);
-                result = await result.OrderBy<T>("Name", OrderType.Asc);
-                result = result.Limit(pageIndex, pageSize);
-                int totalRows = result.Count();
-                return Ok(new Tuple<int, IEnumerable<T>>(totalRows, result));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return Ok(result);
         }
-
         /// <summary>
-        /// Filter the catalogue by a query
+        /// Maps the selected result to the DTO Model
         /// </summary>
-        /// <param name="query">The search query</param>
-        /// <returns>The list of selected items</returns>
-        private async Task<IEnumerable<T>> Filter(string? query)
+        /// <param name="result">The mapped result</param>
+        /// <returns>The list of mapped selected objects</returns>
+        protected override OkObjectResult MapPageResult(IEnumerable<T> result)
         {
-            if (query != null && String.IsNullOrEmpty(query))
+            int totalRows = result.Count();
+            PageResult<T> pageResult = new PageResult<T>()
             {
-                String filter = query.ToFilterString<T>();
-                return await _repository.Search(filter);
-            }
-            return await _repository.GetAll();
+                TotalRows = totalRows,
+                Items = result
+            };
+            return Ok(pageResult);
+        }
+        /// <summary>
+        /// Maps the selected result to the DTO Model
+        /// </summary>
+        /// <param name="result">The mapped result</param>
+        /// <returns>The list of mapped selected objects</returns>
+        protected override OkObjectResult Map(T result)
+        {
+            return Ok(result);
         }
     }
 }

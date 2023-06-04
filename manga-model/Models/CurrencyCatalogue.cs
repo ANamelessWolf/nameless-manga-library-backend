@@ -1,11 +1,4 @@
-﻿using Nameless.Manga.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nameless.Manga.Models
+﻿namespace Nameless.Manga.Models
 {
     public class CurrencyCatalogue : Catalogue
     {

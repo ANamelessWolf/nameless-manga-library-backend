@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Nameless.WebApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Nameless.WebApi.Repositories;
 
 namespace Nameless.WebApi.Utils
 {
@@ -71,5 +73,25 @@ namespace Nameless.WebApi.Utils
                 throw new ArgumentOutOfRangeException("pageSize must be greater than 0");
             return values;
         }
+
+        public static OrderRequest GetOrderRequest(this Type tp, string? orderField, OrderType? orderType)
+        {
+            string[] fieldNames = tp.GetProperties().Select(x => x.Name).ToArray();
+
+            if (orderField == null && fieldNames.Contains("Id"))
+                orderField = "Id";
+            else if (orderField == null)
+                orderField = fieldNames.FirstOrDefault();
+
+            if (!fieldNames.Contains("Id"))
+                throw new ArgumentException($"'{orderField}' is not a field from the entity '{tp.Name}' ");
+
+            if (orderType == null)
+                orderType = OrderType.Asc;
+
+            return new OrderRequest() { orderField = orderField, orderType = orderType.Value };
+        }
+
+
     }
 }

@@ -13,7 +13,8 @@ namespace Nameless.MangaBI.Repositories.Implements
 
         public MangaBIContext Context => (MangaBIContext)this._context;
 
-        public AuthorRepository(MangaBIContext context, AuthorRoleRepository auRole) : base(context)
+        public AuthorRepository(MangaBIContext context, AuthorRoleRepository auRole) 
+            : base(context)
         {
             this.DataIsSelected = SelectAutorRole;
             this._authorRoleRepo = auRole;

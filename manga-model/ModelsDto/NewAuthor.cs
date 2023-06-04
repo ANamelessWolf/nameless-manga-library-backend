@@ -1,5 +1,4 @@
-﻿using Nameless.WebApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,20 +6,15 @@ using System.Threading.Tasks;
 
 namespace Nameless.Manga.ModelsDto
 {
-    public class AuthorDto : BaseDto
+    public class NewAuthor
     {
         /// <summary>
-        /// Catalogue item value
+        /// Author full name
         /// </summary>
         public string? Name { get; set; }
-
         /// <summary>
-        /// Author Role Id
+        /// Author role id
         /// </summary>
         public int RoleId { get; set; }
-        /// <summary>
-        /// Author Role name
-        /// </summary>
-        public string Role { get; set; }
     }
 }

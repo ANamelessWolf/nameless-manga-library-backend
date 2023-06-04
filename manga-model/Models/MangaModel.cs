@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Nameless.Manga.ModelsDto
+namespace Nameless.Manga.Models
 {
     /// <summary>
     /// Manga table model class
     /// </summary>
-    public class MangaDto : BaseDto
+    public class MangaModel : DbModel
     {
         /// <summary>
         /// Manga name
@@ -42,7 +42,7 @@ namespace Nameless.Manga.ModelsDto
         /// <summary>
         /// Manga demographic
         /// </summary>
-        public CatalogueDto Demographic { get; set; }
+        public DemographicCatalogue Demographic{ get; set; }
         /// <summary>
         /// Manga author writer id
         /// </summary>
@@ -50,11 +50,11 @@ namespace Nameless.Manga.ModelsDto
         /// <summary>
         /// Author role
         /// </summary>
-        public AuthorDto? Writer { get; set; }
+        public Author? Writer { get; set; }
         /// <summary>
         /// Author role
         /// </summary>
-        public AuthorDto? Illustrator { get; set; }
+        public Author? Illustrator { get; set; }
         /// <summary>
         /// Manga author illustrator id
         /// </summary>
